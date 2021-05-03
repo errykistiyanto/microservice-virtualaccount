@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<logon-mgr class="co.id.middleware.router.iso.LogonManager" logger="Q2" name="DKILink_LogonMgr" realm="DKILink_LogonMgr">
+    <property name="mux" value="biller-dkilink-channel_mux" />
+    <property name="space" value="jdbm:dkilink" />
+    <property name="logger" value="Q2" />
+    <property name="channel-ready" value="biller-dkilink-channel.ready" />
+    <property name="timeout" value="10000" />
+    <property name="echo-interval" value="10000" />
+    <property name="logon-interval" value="30000" />
+    <property name="logon-mode" value="true" />
+    <property name="echo-mode" value="true" />
+</logon-mgr>

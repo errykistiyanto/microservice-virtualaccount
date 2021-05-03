@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mux class="org.jpos.q2.iso.QMUX" logger="Q2" name="biller-dkilink-channel_mux" realm="biller-dkilink-channel_mux">
+    <out>biller-dkilink-channel-in</out>
+    <in>biller-dkilink-channel-out</in>
+    <ready>biller-dkilink-channel.ready</ready>
+    <unhandled>biller-dkilink-channel-unhandled</unhandled>
+</mux>

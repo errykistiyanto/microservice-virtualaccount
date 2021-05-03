@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<txnmgr class="org.jpos.transaction.TransactionManager" logger="Q2" name="biller-trxmgnr" realm="biller-trxmgnr-realm">
+    <property name="space"      value="tspace:defaultbiller"/>
+    <property name="queue"      value="mytxnqueuebiller"/>
+    <property name="debug"      value="false"/>
+    <property name="profiler"   value="false"/>
+
+    <participant class="co.id.middleware.router.iso.Selector" logger="Q2">
+
+        <property name="0800001"            value="LogOn"/>
+        <property name="0800301"            value="EchoTest"/>
+
+        <property name="0200381000100054"   value="VirtualAccountInquiry"/>
+        <property name="0200501000100054"   value="VirtualAccountPayment"/>
+        <property name="0400501000100054"   value="VirtualAccountReversal"/>
+
+        <property name="isorequest" value="REQUESTBILLER"/>
+        <property name="isosource"  value="ISOBILLER"/>
+        <property name="logger"         value="Q2"/>
+    </participant>
+
+    <group name="Isolog">
+        <participant class="co.id.middleware.router.iso.Isolog" logger="Q2">
+            <property name="isorequest"     value="REQUESTBILLER"/>
+            <property name="isosource"      value="ISOBILLER"/>
+            <property name="logger"         value="Q2"/>
+            <property name="timeout"        value="10000" />
+        </participant>
+    </group>
+
+    <group name="LogOn">
+        <participant class="co.id.middleware.router.iso.Route" logger="Q2">
+            <property name="isorequest"     value="REQUESTBILLER"/>
+            <property name="isosource"      value="ISOBILLER"/>
+            <property name="logger"         value="Q2"/>
+            <property name="timeout"        value="10000" />
+        </participant>
+    </group>
+
+    <group name="EchoTest">
+        <participant class="co.id.middleware.router.iso.Route" logger="Q2">
+            <property name="isorequest"     value="REQUESTBILLER"/>
+            <property name="isosource"      value="ISOBILLER"/>
+            <property name="logger"         value="Q2"/>
+            <property name="timeout"        value="10000" />
+        </participant>
+    </group>
+
+    <group name="VirtualAccountInquiry">
+        <participant class="co.id.middleware.router.iso.virtualaccount.Inquiry" logger="Q2">
+            <property name="isorequest"     value="REQUESTBILLER"/>
+            <property name="isosource"      value="ISOBILLER"/>
+            <property name="logger"         value="Q2"/>
+            <property name="timeout"        value="30000" />
+            <property name="mux"            value="biller-dkilink-channel_mux"/>
+        </participant>
+    </group>
+
+    <group name="VirtualAccountPayment">
+        <participant class="co.id.middleware.router.iso.virtualaccount.Payment" logger="Q2">
+            <property name="isorequest"     value="REQUESTBILLER"/>
+            <property name="isosource"      value="ISOBILLER"/>
+            <property name="logger"         value="Q2"/>
+            <property name="timeout"        value="30000" />
+            <property name="mux"            value="biller-dkilink-channel_mux"/>
+        </participant>
+    </group>
+
+    <group name="VirtualAccountReversal">
+        <participant class="co.id.middleware.router.iso.virtualaccount.Reversal" logger="Q2">
+            <property name="isorequest"     value="REQUESTBILLER"/>
+            <property name="isosource"      value="ISOBILLER"/>
+            <property name="logger"         value="Q2"/>
+            <property name="timeout"        value="30000" />
+            <property name="mux"            value="biller-dkilink-channel_mux"/>
+        </participant>
+    </group>
+
+</txnmgr>
